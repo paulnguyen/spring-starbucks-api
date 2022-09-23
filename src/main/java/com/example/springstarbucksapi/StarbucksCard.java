@@ -18,8 +18,8 @@ import lombok.RequiredArgsConstructor;
 
 /* 
     https://spring.io/guides/tutorials/rest/ 
-		https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#mapping.fundamentals
-		https://www.baeldung.com/jpa-indexes    
+	  https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#mapping.fundamentals
+	  https://www.baeldung.com/jpa-indexes    
 */
 
 @Entity
@@ -35,6 +35,8 @@ class StarbucksCard {
   @Column(nullable=false)   private double balance ;
   @Column(nullable=false)   private boolean activated ;
                             private String status ;
+
+  public boolean isActivated() { return activated == true ; }
 
 }
 

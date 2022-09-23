@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus ;
@@ -21,14 +22,27 @@ import org.springframework.http.HttpStatus ;
 @RestController
 class StarbucksCardController {
 
-  private final StarbucksCardRepository repository;
+  	private final StarbucksCardRepository repository;
 
- StarbucksCardController(StarbucksCardRepository repository) {
-    this.repository = repository;
-  }
+	class Message {
+		private String status;
+
+		public String getStatus() {
+			return status;
+		}
+
+		public void setStatus(String msg) {
+			status = msg;
+		}
+	}
+
+ 	StarbucksCardController(StarbucksCardRepository repository) {
+    	this.repository = repository;
+  	}
 
   /* Create a New Starbucks Card */
   @PostMapping("/cards")
+  @ResponseStatus(HttpStatus.CREATED)
   StarbucksCard newCard() {
     StarbucksCard newcard = new StarbucksCard() ;
 
@@ -55,8 +69,11 @@ class StarbucksCardController {
 
   /* Delete All Starbucks Cards (Cleanup for Unit Testing) */
   @DeleteMapping("/cards")
-  void deleteAll() {
+  Message deleteAll() {
     repository.deleteAllInBatch() ;
+	Message msg = new Message() ;
+	msg.setStatus( "All Cards Cleared!" ) ;
+	return msg ;
   }
 
   /* 
@@ -153,83 +170,11 @@ POST 	/card/activate/{num}/{code}
 		  "Status": ""
 		}
 
-POST    /order/register/{regid}
-        Create a new order. Set order as "active" for register.
-
-        Request:
-
-	    {
-	      "Drink": "Latte",
-	      "Milk":  "Whole",
-	      "Size":  "Grande"
-	    }         
-
-	    Response:
-
-		{
-		  "Drink": "Latte",
-		  "Milk": "Whole",
-		  "Size": "Grande",
-		  "Total": 2.413125,
-		  "Status": "Ready for Payment."
-		}	    
-
-GET     /order/register/{regid}
-        Request the current state of the "active" Order.
-
-		{
-		  "Drink": "Latte",
-		  "Milk": "Whole",
-		  "Size": "Grande",
-		  "Total": 2.413125,
-		  "Status": "Ready for Payment."
-		}
-
-DELETE  /order/register/{regid}
-        Clear the "active" Order.
-
-		{
-		  "Status": "Active Order Cleared!"
-		}
-
-POST    /order/register/{regid}/pay/{cardnum}
-        Process payment for the "active" Order. 
-
-        Response: (with updated card balance)
-
-		{
-		  "CardNumber": "627131848",
-		  "CardCode": "547",
-		  "Balance": 15.17375,
-		  "Activated": true,
-		  "Status": ""
-		}
-
-GET     /orders
-        Get a list of all active orders (for all registers)
-
-		{
-		  "5012349": {
-		    "Drink": "Latte",
-		    "Milk": "Whole",
-		    "Size": "Grande",
-		    "Total": 4.82625,
-		    "Status": "Paid with Card: 627131848 Balance: $15.17."
-		  }
-		}
-
 DELETE 	/cards
 		Delete all Cards (Use for Unit Testing Teardown)
 
 		{
 		  "Status": "All Cards Cleared!"
-		}
-
-DELETE 	/orders
-		Delete all Orders (Use for Unit Testing Teardown)
-
-		{
-		  "Status": "All Orders Cleared!"
 		}
 
 */

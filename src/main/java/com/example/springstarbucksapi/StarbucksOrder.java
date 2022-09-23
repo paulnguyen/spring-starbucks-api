@@ -24,9 +24,9 @@ import lombok.RequiredArgsConstructor;
 class StarbucksOrder {
 
   private @Id @GeneratedValue Long id;
-  private String drink ;
-  private String milk ;
-  private String size ;
+  @Column(nullable=false)  private String drink ;
+  @Column(nullable=false)  private String milk ;
+  @Column(nullable=false)  private String size ;
   private double total ;
   private String status ;
 
@@ -37,7 +37,7 @@ type starbucks_order struct {
 	Drink 		string
 	Milk   		string
 	Size    	string
-	Total		float32
+	Total		  float32
 	Status		string
 }
 */
