@@ -4,7 +4,7 @@
 
 ACCOUNT="paulnguyen"
 CONTAINER="spring-starbucks-api"
-VERSION="v1.0"
+VERSION="v3.0"
 
 # Shell Variables
 
