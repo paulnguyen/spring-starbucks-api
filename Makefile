@@ -13,7 +13,7 @@ build:
 	mvn package
 
 run-jar: build
-	java -jar target/spring-starbucks-api-1.0.jar
+	java -jar target/spring-starbucks-api-2.0.jar
 
 
 
@@ -63,8 +63,8 @@ docker-shell:
 
 docker-push:
 	docker login
-	docker build -t $(account)/spring-starbucks-api:v1.0 -t $(account)/spring-starbucks-api:v1.0 .
-	docker push $(account)/spring-starbucks-api:v1.0 
+	docker build -t $(account)/spring-starbucks-api:v2.0 -t $(account)/spring-starbucks-api:v2.0 .
+	docker push $(account)/spring-starbucks-api:v2.0 
 
 # Compose
 
