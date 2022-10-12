@@ -13,18 +13,4 @@
 * Added Support for Orders
 
 
-### Version 2.1
-
-* Modifications to JPA config to use MySQL Database
-
-
-### Version 3.0
-
-* Added Spring Profiles Support
-
-
-### Version 3.1
-
-* Updated for CMPE 172 Starbucks Project
-
 
